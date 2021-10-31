@@ -68,3 +68,17 @@ where c.class_name = 'A1';
 select s.student_name,s2.sub_name,m.mark
 from student s join manager_student.mark m on s.student_id = m.student_id join manager_student.subject s2 on m.sub_id = s2.sub_id
 where sub_name='CF';
+-- hiển thị tất cả các học viên có tên vắt đầu bằng ký tự 'h'
+select student_name from student where student_name like 'h%';
+-- Hiển thị các thông tin lớp học có thời gian bắt đầu vào tháng 12
+select * from class where month(startDate) = 12;
+-- Hiển thị tất cả các thông tin môn học có credit trong khoảng từ 3-5.
+select * from subject where credit >= 3 and credit <=5;
+-- Thay đổi mã lớp(ClassID) của sinh viên có tên ‘Hung’ là 2.
+update student s set s.class_id = 2 where s.student_name = 'Hung';
+select c.class_id,s.student_name from class c join student s on c.class_id = s.class_id;
+-- Hiển thị các thông tin: StudentName, SubName, Mark. Dữ liệu sắp xếp theo điểm thi (mark) giảm dần. nếu trùng sắp theo tên tăng dần.
+select s.student_name, s2.sub_name, m.mark
+from student s join mark m on s.student_id = m.student_id join subject s2 on m.sub_id = s2.sub_id group by mark
+ORDER BY mark desc;
+
